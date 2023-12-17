@@ -73,7 +73,7 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  if (value[0] === true) {
+  if (typeof value[0] === 'string') {
     return value[0];
   }
   return '';
@@ -139,7 +139,7 @@ function removeTrailingWhitespaces(/* value */) {
  */
 function repeatString(str, times) {
   let res = '';
-  for (let i = 0; i < times; i + 1) {
+  for (let i = 0; i < times; i += 1) {
     res = `${res}${str}`;
   }
   return res;
@@ -157,8 +157,10 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const reg = `/${value}/g`;
+  const res = str.replace(reg, '');
+  return res;
 }
 
 /**
@@ -281,8 +283,12 @@ function orderAlphabetically(/* str */) {
  *   containsSubstring('JavaScript is Fun', 'Python') => false
  *   containsSubstring('12345', '34') => true
  */
-function containsSubstring(/* str, substring */) {
-  throw new Error('Not implemented');
+function containsSubstring(str, substring) {
+  const res = str.indexOf(substring);
+  if (res === -1) {
+    return false;
+  }
+  return true;
 }
 
 /**
@@ -299,8 +305,18 @@ function containsSubstring(/* str, substring */) {
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
+
+function countVowels(str) {
+  let count = 0;
+  const word = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
+  for (let i = 0; i < str.length; i += 1) {
+    for (let a = 0; a < word.length; a += 1) {
+      if (str[i].includes(`${word[a]}`)) {
+        count += 1;
+      }
+    }
+  }
+  return count;
 }
 
 /**
