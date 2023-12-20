@@ -40,8 +40,16 @@ function getStringLength(value) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
+function isString(value) {
+  let res;
+  const preStr = value;
+  const str = String(preStr);
+  if (typeof str === 'string') {
+    res = true;
+  } else {
+    res = false;
+  }
+  return res;
 }
 
 /**
@@ -158,8 +166,7 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  const reg = `/${value}/g`;
-  const res = str.replace(reg, '');
+  const res = str.replace(value, '');
   return res;
 }
 
@@ -408,7 +415,19 @@ function findLongestWord(/* sentence */) {}
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {}
+function reverseWords(str) {
+  const newStr = str.split(' ');
+  let word;
+  let res = '';
+  let resTrim = '';
+
+  for (let i = 0; i < newStr.length; i += 1) {
+    word = newStr[i].split('').reverse().join('');
+    res = `${res} ${word}`;
+    resTrim = res.trimStart();
+  }
+  return resTrim;
+}
 /**
  * Inverts the case of each character in the given string.
  *
@@ -542,8 +561,18 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const str = `'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
+  'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
+   'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
+    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠' `;
+  let a;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === value) {
+      a = i;
+    }
+  }
+  return a;
 }
 
 module.exports = {
