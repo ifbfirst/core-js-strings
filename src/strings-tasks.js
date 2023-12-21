@@ -65,8 +65,7 @@ function isString(value) {
  *   concatenateStrings('', 'bb') => 'bb'
  */
 function concatenateStrings(value1, value2) {
-  const res = `${value1}${value2}`;
-  return res;
+  return ''.concat(value1, value2);
 }
 
 /**
@@ -82,7 +81,7 @@ function concatenateStrings(value1, value2) {
  */
 function getFirstChar(value) {
   if (typeof value[0] === 'string') {
-    return value[0];
+    return value.at(0);
   }
   return '';
 }
@@ -106,6 +105,7 @@ function removeLeadingAndTrailingWhitespaces(value) {
  * Removes only leading whitespace characters from the string.
  *
  * @param {string} value - The input string to remove leading whitespaces from.
+ *
  * @return {string} - The string with leading whitespaces removed.
  *
  * @example
@@ -146,10 +146,8 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  let res = '';
-  for (let i = 0; i < times; i += 1) {
-    res = `${res}${str}`;
-  }
+  const newTimes = Math.abs(times);
+  const res = str.repeat(newTimes);
   return res;
 }
 
