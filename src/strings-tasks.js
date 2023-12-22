@@ -170,8 +170,7 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-
-  str.lastIndexOf(value)
+  str.lastIndexOf(value);
 }
 
 /**
