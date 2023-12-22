@@ -40,11 +40,13 @@ function getStringLength(value) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(value) {
+function isString(str) {
   let res;
-  const preStr = value;
-  const str = String(preStr);
-  if (typeof str === 'string') {
+  let newStr;
+  if (typeof str === 'object' && str !== null) {
+    newStr = str.toString();
+  }
+  if (typeof str === 'string' || typeof newStr === 'string') {
     res = true;
   } else {
     res = false;
@@ -80,8 +82,8 @@ function concatenateStrings(value1, value2) {
  *   getFirstChar('') => ''
  */
 function getFirstChar(value) {
-  if (typeof value[0] === 'string') {
-    return value.at(0);
+  if (typeof value.charAt(0) === 'string') {
+    return value.charAt(0);
   }
   return '';
 }
@@ -146,8 +148,12 @@ function removeTrailingWhitespaces(value) {
  *   repeatString('abc', -2) => ''
  */
 function repeatString(str, times) {
-  const newTimes = Math.abs(times);
-  const res = str.repeat(newTimes);
+  let res = '';
+  if (Math.abs(times) === times) {
+    res = str.repeat(times);
+  } else {
+    res = '';
+  }
   return res;
 }
 
@@ -164,8 +170,8 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  const res = str.replace(value, '');
-  return res;
+
+  str.lastIndexOf(value)
 }
 
 /**
@@ -220,12 +226,7 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'Hello') => true
  */
 function startsWith(str, substr) {
-  const len = substr.length;
-  const res = str.slice(0, len);
-  if (res === substr) {
-    return true;
-  }
-  return false;
+  return str.startsWith(substr);
 }
 
 /**
@@ -240,12 +241,7 @@ function startsWith(str, substr) {
  *   endsWith('Hello World', 'Hello') => false
  */
 function endsWith(str, substr) {
-  const len = substr.length;
-  const res = str.slice(str.length - len);
-  if (res === substr) {
-    return true;
-  }
-  return false;
+  return str.endsWith(substr);
 }
 
 /**
@@ -328,11 +324,7 @@ function orderAlphabetically(str) {
  *   containsSubstring('12345', '34') => true
  */
 function containsSubstring(str, substring) {
-  const res = str.indexOf(substring);
-  if (res === -1) {
-    return false;
-  }
-  return true;
+  return str.includes(substring);
 }
 
 /**
