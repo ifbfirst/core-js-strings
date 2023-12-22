@@ -41,17 +41,10 @@ function getStringLength(value) {
  *   isString(new String('test')) => true
  */
 function isString(str) {
-  let res;
-  let newStr;
-  if (typeof str === 'object' && str !== null) {
-    newStr = str.toString();
+  if (typeof str === 'string' || str instanceof String) {
+    return true;
   }
-  if (typeof str === 'string' || typeof newStr === 'string') {
-    res = true;
-  } else {
-    res = false;
-  }
-  return res;
+  return false;
 }
 
 /**
@@ -170,7 +163,14 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  str.lastIndexOf(value);
+  const index = str.indexOf(value);
+  let res;
+  if (index !== -1) {
+    res = `${str.slice(0, index)}${str.slice(index + value.length)}`;
+  } else {
+    res = str;
+  }
+  return res;
 }
 
 /**
@@ -185,8 +185,15 @@ function removeFirstOccurrences(str, value) {
  *   removeLastOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeLastOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeLastOccurrences(/* str, value */) {
-  throw new Error('Not implemented');
+function removeLastOccurrences(str, value) {
+  const index = str.lastIndexOf(value);
+  let res;
+  if (index !== -1) {
+    res = `${str.slice(0, index)}${str.slice(index + value.length)}`;
+  } else {
+    res = str;
+  }
+  return res;
 }
 
 /**
