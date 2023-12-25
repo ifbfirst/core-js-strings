@@ -264,27 +264,7 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  let min;
-  let sec;
-  let res = '';
-  if (minutes < 10) {
-    min = `0${minutes}`;
-  } else {
-    min = `${minutes}`;
-  }
-  if (seconds < 10) {
-    sec = `0${seconds}`;
-  } else {
-    sec = `${seconds}`;
-  }
-  if (seconds === 0) {
-    sec = `00`;
-  }
-  if (minutes === 0) {
-    min = `00`;
-  }
-  res = `${min}:${sec}`;
-  return res;
+  return `${String(minutes).padStart(2, 0)}:${String(seconds).padStart(2, 0)}`;
 }
 
 /**
@@ -399,7 +379,16 @@ function isPalindrome(str) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {}
+function findLongestWord(sentence) {
+  const arr = sentence.split(' ');
+  let longestWord = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i].length > longestWord.length) {
+      longestWord = arr[i];
+    }
+  }
+  return longestWord;
+}
 
 /**
  * Returns the string where each word is reversed.
@@ -529,10 +518,20 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const input = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+  const output = 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm';
+  let res = '';
+  for (let i = 0; i < str.length; i += 1) {
+    const index = input.indexOf(str[i]);
+    if (index < 0) {
+      res += str[i];
+    } else {
+      res += output[index];
+    }
+  }
+  return res;
 }
-
 /**
  * Returns playid card id.
  *
@@ -558,17 +557,61 @@ function encodeToRot13(/* str */) {
  *   'K♠' => 51
  */
 function getCardId(value) {
-  const str = `'A♣','2♣','3♣','4♣','5♣','6♣','7♣','8♣','9♣','10♣','J♣','Q♣','K♣',
-  'A♦','2♦','3♦','4♦','5♦','6♦','7♦','8♦','9♦','10♦','J♦','Q♦','K♦',
-   'A♥','2♥','3♥','4♥','5♥','6♥','7♥','8♥','9♥','10♥','J♥','Q♥','K♥',
-    'A♠','2♠','3♠','4♠','5♠','6♠','7♠','8♠','9♠','10♠','J♠','Q♠','K♠' `;
-  let a;
-  for (let i = 0; i < str.length; i += 1) {
-    if (str[i] === value) {
-      a = i;
-    }
-  }
-  return a;
+  const card = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  return card.indexOf(value);
 }
 
 module.exports = {
